@@ -7,8 +7,8 @@ IDIR = dependencies/include
 
 INCLUDE = -I$(IDIR) #-I$(IDIRGLFW) -I$(IDIRGlad) 
 
-LIBDIR = ../../dependencies/GLFW/lib-mingw-w64
-LIBS = -L$(LIBDIR)
+#LIBDIR = ../../dependencies/GLFW/lib-mingw-w64
+#LIBS = -L$(LIBDIR)
 
 #LIBLINK = -lopengl32 $(LIBDIR)/libglfw3.a -lgdi32 #-mwindows
 #_DEPS = testinclude.h
@@ -31,7 +31,7 @@ EXECUTABLE_DIR = build/bin/$(EXECUTABLE)
 MAIN = $(patsubst $(EXECUTABLE),$(EXECUTABLE).c,$(EXECUTABLE))
 
 $(EXECUTABLE):$(OBJ)
-	$(CC) $(CC_FLAGS) src/$(MAIN) $(INCLUDE) $(LIBS) $(OBJ) -o $(EXECUTABLE_DIR)
+	$(CC) $(CC_FLAGS) src/$(MAIN) $(INCLUDE) $(OBJ) -o $(EXECUTABLE_DIR)
 
-$(ODIR)/%.o:$(SRCDIR)/%.cpp $(DEPS) 
+$(ODIR)/%.o:$(SRCDIR)/%.c
 	$(CC) $(CC_FLAGS) -c $< $(INCLUDE)  -o $@

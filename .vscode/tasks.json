@@ -9,6 +9,8 @@
 				"-fdiagnostics-color=always",
 				"-g",
 				"${file}",
+				"dependencies\\src\\colorfulterminal.c",
+				"-I\"dependencies\\include\"",
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe"
 			],
