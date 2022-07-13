@@ -4,4 +4,5 @@
 void green_disp(const char* str);
 void yellow_disp(const char* str);
 void grey_disp(const char* str);
+void makenormal();
 #endif
