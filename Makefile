@@ -1,5 +1,5 @@
 CC = g++
-CC_FLAGS = -std=c++17
+CC_FLAGS = -g -std=c++17
 
 #IDIRGLFW = dependencies/GLFW/include
 #IDIRGlad = ../../dependencies/Glad/include

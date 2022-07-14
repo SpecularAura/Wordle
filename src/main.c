@@ -127,16 +127,16 @@ int main()
             str[1]= '\0';
             if (j == s2Loc[j].find[j])
             {
-                green_disp(str);
+                green_disp(s2[j]);
             }
             else if (locfind(s2Loc[j], j, (sizeof(s2Loc[j].find)/sizeof(int))) && grey != 0)
             {
                 s2Loc[j].noofyellow--;
-                yellow_disp(str);
+                yellow_disp(s2[j]);
             }
             else
             {
-                grey_disp(str);
+                grey_disp(s2[j]);
             }
         }
         printf("\n");

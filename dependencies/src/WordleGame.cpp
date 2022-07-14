@@ -4,18 +4,14 @@ WordleGame::WordleGame(std::string_view str) :
                 no_of_tries{0}, is_end{false}, answer{str}, lines_to_delete{1}
 
 {
-
 }
 
 void WordleGame::GameLoop()
 {
-    while(is_end)
+    while(!is_end)
     {
         Input();
-        if(no_of_tries == 0)
-        {
-            WordLocInit();
-        }
+        WordLocInit();
         no_of_tries++;
         WordLoop();
         EndCheck();
@@ -27,7 +23,6 @@ Error WordleGame::FaultyInput()
     if(input.length() != wordsize::wordsize)
     {
         lines_to_delete++;
-        std::cout<<"ENTER THE CORRECT WORD SIZE\n";
         return Error::WordLimit;
     }
     else
@@ -38,10 +33,10 @@ Error WordleGame::FaultyInput()
 
 void WordleGame::WordLocInit()
 {
-    for(int i=lines_to_delete; i>0; i++)
-    {
+    //for(int i=lines_to_delete; i>0; i--)
+    //{
         std::cout<<"\033[A\33[2K\r";
-    }
+    //}
 }
 void WordleGame::Input()
 {
@@ -53,10 +48,8 @@ void WordleGame::Input()
         break;
     case Error::WordLimit:
         std::cout<<"ENTER THE CORRECT WORD SIZE\n";
-        lines_to_delete++;
         break;
     case Error::RepeatWord:
-        lines_to_delete++;
         std::cout<<"";
         break;
     default:
@@ -118,9 +111,10 @@ void WordleGame::PrintChar(Color color, char ch)
     
     case Color::Grey:
         grey_disp(ch);
-
+        break;
     case Color::Yellow:
         yellow_disp(ch);
+        break;
     default:
         std::cout<<"Should Not Be Here\n";
         break;
@@ -133,7 +127,7 @@ void WordleGame::EndCheck()
 
     if(answer == input)
     {
-        std::cout<<"Your score :"<<no_of_tries + 1<< "/6";
+        std::cout<<"Your score :"<<no_of_tries<< "/6";
         is_end = true;
     }
     else if(no_of_tries == 6)

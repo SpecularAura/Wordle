@@ -1,5 +1,8 @@
+#include"WordleGame.h"
+#include"WordLoc.h"
 #include<iostream>
 int main()
 {
-    std::cout<<"Hello";
+    WordleGame Game{"start"};
+    Game.GameLoop();
 }
