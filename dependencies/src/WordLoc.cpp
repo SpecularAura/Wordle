@@ -62,6 +62,11 @@ bool WordLoc::operator == (const WordLoc& wordloc)
     return (ch_pos == wordloc.ch_pos);
 }
 
+bool WordLoc::operator == (char ch)
+{
+    return (ch_pos == ch);
+}
+
 
 void WordLoc::UpdateYellow()
 {

@@ -22,6 +22,7 @@ public:
     void SetYellow(const WordLoc& wordloc);
     bool ShowYellow(int j);
     bool operator == (const WordLoc& wordloc);
+    bool operator == (char ch);
     void UpdateYellow();
 };
 

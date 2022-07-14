@@ -45,10 +45,24 @@ void WordleGame::WordLoop()
         int cont = Contains(j);
         if (cont != -1)
         {
-
+            answer_loc[j] = answer_loc[cont];
+        }
+        else
+        {
+            answer_loc[j].LetterPos(answer, input[j]);
+            input_loc.LetterPos(input, input[j]);
         }
     }
 }
-WordleGame::~WordleGame()
+
+int WordleGame::Contains(int j)
 {
+    for(int i=0; i<j; i++)
+    {
+        if(answer_loc[i] == input[j])
+        {
+            return i;
+        }
+    }
+    return -1;
 }
