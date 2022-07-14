@@ -1,5 +1,5 @@
-CC = gcc
-CC_FLAGS = -g
+CC = g++
+CC_FLAGS = -std=c++17
 
 #IDIRGLFW = dependencies/GLFW/include
 #IDIRGlad = ../../dependencies/Glad/include
@@ -17,21 +17,26 @@ _DEPS = $(wildcard $(IDIR)/*.h)
 DEPS = $(_DEPS)
 
 SRCDIR = dependencies/src
-ODIR = build/bin/dependencies
+ODIR = debugbuild/dependencies
 #_CPP = testinclude.cpp
-_CPP = $(wildcard $(SRCDIR)/*.c)
+_CPP = $(wildcard $(SRCDIR)/*.cpp)
+_C   = $(wildcard $(SRCDIR)/*.c)
 #CPP = $(patsubst %,$(SRCDIR)/%,$(_CPP))
-CPP = $(_CPP)
+CPP = $(_CPP) $(_C)
 
 #_OBJ = $(patsubst %.cpp,%.o,$(CPP))
-_OBJ = $(patsubst $(SRCDIR)/%.c,$(ODIR)/%.o,$(CPP))
-OBJ = $(_OBJ) #${ODIR}/glad.o
+_CPPOBJ = $(patsubst $(SRCDIR)/%.cpp,$(ODIR)/%.o,$(_CPP))
+_COBJ   = $(patsubst $(SRCDIR)/%.c,$(ODIR)/%.o,$(_C))
+OBJ = $(_CPPOBJ) $(_COBJ) #${ODIR}/glad.o
 EXECUTABLE = main
-EXECUTABLE_DIR = build/bin/$(EXECUTABLE)
-MAIN = $(patsubst $(EXECUTABLE),$(EXECUTABLE).c,$(EXECUTABLE))
+EXECUTABLE_DIR = debugbuild/$(EXECUTABLE)
+MAIN = $(patsubst $(EXECUTABLE),$(EXECUTABLE).cpp,$(EXECUTABLE))
 
 $(EXECUTABLE):$(OBJ)
 	$(CC) $(CC_FLAGS) src/$(MAIN) $(INCLUDE) $(OBJ) -o $(EXECUTABLE_DIR)
 
 $(ODIR)/%.o:$(SRCDIR)/%.c
+	$(CC) $(CC_FLAGS) -c $< $(INCLUDE)  -o $@
+
+$(ODIR)/%.o:$(SRCDIR)/%.cpp
 	$(CC) $(CC_FLAGS) -c $< $(INCLUDE)  -o $@
