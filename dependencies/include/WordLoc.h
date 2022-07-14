@@ -23,8 +23,7 @@ public:
     bool ShowYellow(int j);
     bool operator == (const WordLoc& wordloc);
     bool operator == (char ch);
+    bool operator == (int j);
     void UpdateYellow();
 };
-
-
 #endif

@@ -67,7 +67,10 @@ bool WordLoc::operator == (char ch)
     return (ch_pos == ch);
 }
 
-
+bool WordLoc::operator == (int j)
+{
+    return (find[j] == j);
+}
 void WordLoc::UpdateYellow()
 {
     yellow_count = yellow_count - 1;

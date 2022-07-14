@@ -4,10 +4,17 @@
 #include<string>
 #include<string_view>
 #include<iostream>
+#include "WordLoc.h"
+#include "colorfulterminal.h"
 
 enum class Error
 {
     NoError, WordLimit, RepeatWord
+};
+
+enum class Color
+{
+    Green, Yellow, Grey
 };
 
 class WordleGame
@@ -25,6 +32,7 @@ public:
     Error FaultyInput();
     void WordLocInit();
     void WordLoop();
+    void PrintChar(Color color, char ch);
     int Contains(int j);
     void EndCheck();
 };
