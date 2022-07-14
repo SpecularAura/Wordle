@@ -1,6 +1,6 @@
 #include "WordLoc.h"
 
-WordLoc::WordLoc(int initval) : yellowcount{0}, chpos{'\0'}
+WordLoc::WordLoc(int initval) : yellow_count{0}, ch_pos{'\0'}
 {
     for(auto it = find.begin(); it != find.end(); it++)
     {
@@ -10,7 +10,7 @@ WordLoc::WordLoc(int initval) : yellowcount{0}, chpos{'\0'}
 
 void WordLoc::SetFindChar(char ch)
 {
-    chpos = ch;
+    ch_pos = ch;
 }
 
 void WordLoc::LetterPos(const std::string& str, char ch)
@@ -38,7 +38,7 @@ void WordLoc::SetYellow(const WordLoc& wordloc)
         }
         
     }
-    yellowcount = lettercount - correctpos;
+    yellow_count = lettercount - correctpos;
 }
 
 bool WordLoc::ShowYellow(int j) 
@@ -52,16 +52,18 @@ bool WordLoc::ShowYellow(int j)
             infind = true;
         }
     }
-    isyellow = infind && static_cast<bool>(yellowcount);
+    isyellow = infind && static_cast<bool>(yellow_count);
     UpdateYellow();
     return isyellow;
 }
 
+bool WordLoc::operator == (const WordLoc& wordloc)
+{
+    return (ch_pos == wordloc.ch_pos);
+}
+
+
 void WordLoc::UpdateYellow()
 {
-    yellowcount = yellowcount - 1;
-}
-WordLoc::~WordLoc()
-{
-    
+    yellow_count = yellow_count - 1;
 }
