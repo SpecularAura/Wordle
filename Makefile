@@ -32,11 +32,8 @@ EXECUTABLE = main
 EXECUTABLE_DIR = debugbuild/$(EXECUTABLE)
 MAIN = $(patsubst $(EXECUTABLE),$(EXECUTABLE).cpp,$(EXECUTABLE))
 
-$(EXECUTABLE):$(OBJ) WordGenerator
+$(EXECUTABLE):$(OBJ)
 	$(CC) $(CC_FLAGS) src/$(MAIN) $(INCLUDE) $(OBJ) -o $(EXECUTABLE_DIR)
-
-WordGenerator:
-	$(CC) $(CC_FLAGS) src/WordGenerator.cpp -o debugbuild/WordGenerator.exe
 
 $(ODIR)/%.o:$(SRCDIR)/%.c
 	$(CC) $(CC_FLAGS) -c $< $(INCLUDE)  -o $@

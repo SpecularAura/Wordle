@@ -28,7 +28,6 @@ public:
 
 int main()
 {
-    Timer t;
     std::vector<std::string> words;
     std::string str{};
     std::ifstream inf{"NewWordleList.txt"};

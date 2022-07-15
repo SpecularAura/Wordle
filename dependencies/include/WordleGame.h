@@ -3,13 +3,17 @@
 #include<array>
 #include<string>
 #include<string_view>
+#include<fstream>
+#include<chrono>
+#include<random>
+#include<vector>
 #include<iostream>
 #include "WordLoc.h"
 #include "colorfulterminal.h"
 
 enum class Error
 {
-    NoError, WordLimit, RepeatWord
+    NoError, WordLimit, RepeatWord, NotInList
 };
 
 enum class Color
@@ -25,7 +29,9 @@ private:
     std::string answer, input;
     std::array<WordLoc, wordsize::wordsize> answer_loc;
     WordLoc input_loc;
+    std::vector<std::string> word_list;
 public:
+    WordleGame();
     WordleGame(std::string_view str);
     void GameLoop();
     bool Input();
@@ -35,5 +41,7 @@ public:
     void PrintChar(Color color, char ch);
     int Contains(int j);
     void EndCheck();
+    std::string GenrateRandom();
+    
 };
 #endif
