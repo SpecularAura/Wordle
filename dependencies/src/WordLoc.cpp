@@ -31,7 +31,7 @@ void WordLoc::LetterPos(const std::string& str, char ch)
 
 void WordLoc::SetYellow(const WordLoc& wordloc)
 {
-    int lettercount{0};
+    int answerlettercount{0};
     int correctpos{0};
     for (int i = 0; i < find.size(); i++)
     {
@@ -41,11 +41,11 @@ void WordLoc::SetYellow(const WordLoc& wordloc)
         }
         if (find[i] != -1)
         {
-            lettercount++;
+            answerlettercount++;
         }
         
     }
-    yellow_count = lettercount - correctpos;
+    yellow_count = answerlettercount - correctpos;
 }
 
 bool WordLoc::ShowYellow(int j) 
@@ -80,7 +80,10 @@ bool WordLoc::operator == (int j)
 }
 void WordLoc::UpdateYellow()
 {
-    yellow_count = yellow_count - 1;
+    if(yellow_count != 0)
+    {
+        yellow_count = yellow_count - 1;
+    }
 }
 
 std::ostream& operator << (std::ostream& out, const WordLoc& wordloc)
