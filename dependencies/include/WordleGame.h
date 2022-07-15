@@ -28,7 +28,7 @@ private:
 public:
     WordleGame(std::string_view str);
     void GameLoop();
-    void Input();
+    bool Input();
     Error FaultyInput();
     void WordLocInit();
     void WordLoop();

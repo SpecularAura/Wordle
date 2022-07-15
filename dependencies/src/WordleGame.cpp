@@ -2,7 +2,7 @@
 #include <cstdio>
 
 WordleGame::WordleGame(std::string_view str) : 
-                no_of_tries{0}, is_end{false}, answer{str}, lines_to_delete{1}
+                no_of_tries{0}, is_end{false}, answer{str}, lines_to_delete{0}
 
 {
 }
@@ -11,7 +11,11 @@ void WordleGame::GameLoop()
 {
     while(!is_end)
     {
-        Input();
+
+        if (Input())
+        {
+            continue;
+        }
         WordLocInit();
         no_of_tries++;
         WordLoop();
@@ -34,26 +38,28 @@ Error WordleGame::FaultyInput()
 
 void WordleGame::WordLocInit()
 {
-    //for(int i=lines_to_delete; i>0; i--)
-    //{
-        printf("\033[A\33[2K\r");
-    //}
+    for(int i=lines_to_delete; i>0; i--)
+    {
+        std::cout<<"\033[A\33[2K\r";
+    }
+    lines_to_delete = 0;
 }
-void WordleGame::Input()
+bool WordleGame::Input()
 {
     std::cin>>input;
+    std::cout<<"\033[A\33[2K\r";
     Error message = FaultyInput();
     switch (message)
     {
     case Error::NoError:
+        return false;
         break;
     case Error::WordLimit:
         std::cout<<"ENTER THE CORRECT WORD SIZE\n";
-        break;
     case Error::RepeatWord:
         std::cout<<"";
-        break;
     default:
+        return true;
         std::cout<<"Should Not Be Here\n";
         break;
     }
