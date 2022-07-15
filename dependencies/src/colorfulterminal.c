@@ -3,24 +3,24 @@
 #include <windows.h>
 
 // Green Disp
-void green_disp(const char* str)
+void green_disp(char ch)
 {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN);
-    printf("%s", str);
+    printf("%c", ch);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0|FOREGROUND_BLUE|FOREGROUND_GREEN|FOREGROUND_RED);
 }
 
-void yellow_disp(const char* str)
+void yellow_disp(char ch)
 {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_GREEN|BACKGROUND_RED);
-    printf("%s", str);
+    printf("%c", ch);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0|FOREGROUND_BLUE|FOREGROUND_GREEN|FOREGROUND_RED);
 }
 
-void grey_disp(const char* str)
+void grey_disp(char ch)
 {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY);
-    printf("%s", str);
+    printf("%c", ch);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0|FOREGROUND_BLUE|FOREGROUND_GREEN|FOREGROUND_RED);
 }
 
