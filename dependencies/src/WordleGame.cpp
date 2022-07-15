@@ -110,10 +110,13 @@ bool WordleGame::Input()
         break;
     case Error::WordLimit:
         std::cout<<"ENTER THE CORRECT WORD SIZE\n";
+        return true;
     case Error::RepeatWord:
         std::cout<<"YOU HAVE ALREADY ENTERED A WORD\n";
+        return true;
     case Error::NotInList:
         std::cout<<"NOT IN WORD LIST\n";
+        return true;
     default:
         return true;
         std::cout<<"Should Not Be Here\n";
