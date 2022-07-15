@@ -1,4 +1,5 @@
 #include "WordleGame.h"
+#include <cstdio>
 
 WordleGame::WordleGame(std::string_view str) : 
                 no_of_tries{0}, is_end{false}, answer{str}, lines_to_delete{1}
@@ -35,7 +36,7 @@ void WordleGame::WordLocInit()
 {
     //for(int i=lines_to_delete; i>0; i--)
     //{
-        std::cout<<"\033[A\33[2K\r";
+        printf("\033[A\33[2K\r");
     //}
 }
 void WordleGame::Input()
@@ -68,6 +69,8 @@ void WordleGame::WordLoop()
         }
         else
         {
+            //answer_loc[j].SetFindChar(input[j]);
+            //input_loc.SetFindChar(input[j]);
             answer_loc[j].LetterPos(answer, input[j]);
             input_loc.LetterPos(input, input[j]);
             answer_loc[j].SetYellow(input_loc);

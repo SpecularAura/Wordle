@@ -3,6 +3,7 @@
 #include<string>
 #include<array>
 #include<algorithm>
+#include<iostream>
 
 namespace wordsize
 {
@@ -24,6 +25,7 @@ public:
     bool operator == (const WordLoc& wordloc);
     bool operator == (char ch);
     bool operator == (int j);
+    friend std::ostream& operator<< (std::ostream& out, const WordLoc& wordloc);
     void UpdateYellow();
 };
 #endif

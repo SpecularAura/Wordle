@@ -16,25 +16,32 @@ void WordLoc::SetFindChar(char ch)
 void WordLoc::LetterPos(const std::string& str, char ch)
 {
     SetFindChar(ch);
-    for(int i=0; i < str.size(); i++) 
+    for(int i=0; i < str.length(); i++) 
     {
         if(str[i] == ch)
         {
             find[i] = i;
+        }
+        else
+        {
+            find[i] = -1;
         }
     }
 }
 
 void WordLoc::SetYellow(const WordLoc& wordloc)
 {
-    int notfoundcount{ static_cast<int>(std::count(find.begin(), find.end(), -1))};
-    int lettercount{static_cast<int>(find.size()) - notfoundcount};
+    int lettercount{0};
     int correctpos{0};
     for (int i = 0; i < find.size(); i++)
     {
         if (find[i] == wordloc.find[i] && find[i] != -1)
         {
             correctpos++;
+        }
+        if (find[i] != -1)
+        {
+            lettercount++;
         }
         
     }
@@ -74,4 +81,14 @@ bool WordLoc::operator == (int j)
 void WordLoc::UpdateYellow()
 {
     yellow_count = yellow_count - 1;
+}
+
+std::ostream& operator << (std::ostream& out, const WordLoc& wordloc)
+{
+    for(int i = 0; i < wordloc.find.size(); i++)
+    {
+        out<<wordloc.find[i]<<" ";
+    }
+    out<<"\n";
+    return out;
 }
