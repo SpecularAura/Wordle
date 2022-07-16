@@ -5,7 +5,7 @@ WordleGame::WordleGame(std::string_view str) :
 
 WordleGame::WordleGame():no_of_tries{0}, is_end{false}, lines_to_delete{0}
 {
-    std::vector<std::string> words;
+    //std::vector<std::string> words;
     std::string str{};
     std::ifstream inf{"NewWordleList.txt"};
 
@@ -17,44 +17,19 @@ WordleGame::WordleGame():no_of_tries{0}, is_end{false}, lines_to_delete{0}
     while(inf)
     {
         inf >> str;
-        words.push_back(str);
+        word_list.push_back(str);
     }
     std::mt19937 mt{ static_cast<unsigned int>(
 		std::chrono::steady_clock::now().time_since_epoch().count()
 		) };
     std::uniform_int_distribution<std::mt19937::result_type> dist(1, 2310); // distribution in range [1, 6]
     std::ofstream outfr{"TestFile.txt"};
-    str = words[dist(mt)];
+    str = word_list[dist(mt)];
     outfr << str;
-    word_list = words;
+    //word_list = words;
     answer = str;
 }
 
-/* std::string WordleGame::GenrateRandom()
-{
-    std::vector<std::string> words;
-    std::string str{};
-    std::ifstream inf{"NewWordleList.txt"};
-
-    if( !inf )
-    {
-        std::cerr<< "Could not open NewWordleList.txt";
-    }
-
-    while(inf)
-    {
-        inf >> str;
-        words.push_back(str);
-    }
-    std::mt19937 mt{ static_cast<unsigned int>(
-		std::chrono::steady_clock::now().time_since_epoch().count()
-		) };
-    std::uniform_int_distribution<std::mt19937::result_type> dist(1, 2310); // distribution in range [1, 6]
-    std::ofstream outfr{"TestFile.txt"};
-    int random_no = dist(mt);
-    outfr << words[random_no];
-    return words[random_no];
-} */
 void WordleGame::GameLoop()
 {
     while(!is_end)
@@ -79,6 +54,12 @@ Error WordleGame::FaultyInput()
         lines_to_delete++;
         return Error::WordLimit;
     }
+    else if(std::find(input_history.cbegin(), input_history.cend(), input) 
+            != input_history.cend())
+    {
+        lines_to_delete++;
+        return Error::RepeatWord;
+    }
     else if(it == word_list.cend())
     {
         lines_to_delete++;
@@ -98,6 +79,7 @@ void WordleGame::WordLocInit()
     }
     lines_to_delete = 0;
 }
+
 bool WordleGame::Input()
 {
     std::cin>>input;
@@ -106,13 +88,14 @@ bool WordleGame::Input()
     switch (message)
     {
     case Error::NoError:
+        UpdateInputHistory();
         return false;
         break;
     case Error::WordLimit:
         std::cout<<"ENTER THE CORRECT WORD SIZE\n";
         return true;
     case Error::RepeatWord:
-        std::cout<<"YOU HAVE ALREADY ENTERED A WORD\n";
+        std::cout<<"YOU HAVE ALREADY ENTERED THIS WORD\n";
         return true;
     case Error::NotInList:
         std::cout<<"NOT IN WORD LIST\n";
@@ -134,8 +117,6 @@ void WordleGame::WordLoop()
         }
         else
         {
-            //answer_loc[j].SetFindChar(input[j]);
-            //input_loc.SetFindChar(input[j]);
             answer_loc[j].LetterPos(answer, input[j]);
             input_loc.LetterPos(input, input[j]);
             answer_loc[j].SetYellow(input_loc);
@@ -189,6 +170,11 @@ void WordleGame::PrintChar(Color color, char ch)
     }
 }
 
+void WordleGame::UpdateInputHistory()
+{
+    input_history.push_back(input);
+}
+
 void WordleGame::EndCheck()
 {
     std::cout<<"\n";
@@ -203,5 +189,4 @@ void WordleGame::EndCheck()
         std::cout<<"The word was "<<answer;
         is_end = true;
     }
-
 }
