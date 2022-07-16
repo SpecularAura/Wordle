@@ -155,14 +155,14 @@ void WordleGame::PrintChar(Color color, char ch)
     switch (color)
     {
     case Color::Green:
-        green_disp(ch);
+        std::cout<<"\033[102;30m"<<ch<<"\033[0m";
         break;
     
     case Color::Grey:
-        grey_disp(ch);
+        std::cout<<"\033[100;30m"<<ch<<"\033[0m";
         break;
     case Color::Yellow:
-        yellow_disp(ch);
+        std::cout<<"\033[43;30m"<<ch<<"\033[0m";
         break;
     default:
         std::cout<<"Should Not Be Here\n";

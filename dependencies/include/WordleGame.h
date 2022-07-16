@@ -9,7 +9,7 @@
 #include<vector>
 #include<iostream>
 #include "WordLoc.h"
-#include "colorfulterminal.h"
+//#include "colorfulterminal.h"
 
 enum class Error
 {
