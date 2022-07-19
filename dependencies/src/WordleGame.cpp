@@ -7,16 +7,15 @@ WordleGame::WordleGame():no_of_tries{0}, is_end{false}, lines_to_delete{0}
 {
     //std::vector<std::string> words;
     std::string str{};
-    std::ifstream inf{"NewWordleList.txt"};
+    std::ifstream inf{"../src/NewWordleList.txt"};
 
     if( !inf )
     {
         std::cerr<< "Could not open NewWordleList.txt";
     }
 
-    while(inf)
+    while(inf >> str)
     {
-        inf >> str;
         word_list.push_back(str);
     }
     std::mt19937 mt{ static_cast<unsigned int>(
